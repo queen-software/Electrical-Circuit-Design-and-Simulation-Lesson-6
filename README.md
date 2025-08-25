@@ -636,111 +636,111 @@ tinkercad.com gir orda oluştura bas.Sonra devrelere bas.
     }
 
 ## Happy Birthday 
-// LED'lerin bağlı olduğu pinleri tanımlayın
-const int sariLedPin = 7;
-const int kirmiziLedPin = 6;
-const int maviLedPin = 5;
-
-// Buzzer'ın bağlı olduğu pini tanımlayın
-const int buzzerPin = 8;
-
-// Potansiyometrenin bağlı olduğu analog pini tanımlayın
-const int potPin = A0;
-
-// Değişkenleri tanımlayın
-int potValue = 0;
-int beklemeSuresi = 0;
-int frekans = 0;
-
-// Happy Birthday notalarını ve sürelerini tanımlayın
-#define NOTE_C4  262
-#define NOTE_D4  294
-#define NOTE_E4  330
-#define NOTE_F4  349
-#define NOTE_G4  392
-#define NOTE_A4  440
-#define NOTE_AS4 466
-#define NOTE_B4  494
-#define NOTE_C5  523
-#define NOTE_D5  587
-#define NOTE_E5  659
-
-// Happy Birthday şarkısının melodisi
-int melody[] = {
-  NOTE_C4, NOTE_C4, NOTE_D4, NOTE_C4, NOTE_F4, NOTE_E4, // Happy Birthday to you
-  NOTE_C4, NOTE_C4, NOTE_D4, NOTE_C4, NOTE_G4, NOTE_F4, // Happy Birthday to you
-  NOTE_C4, NOTE_C4, NOTE_C5, NOTE_A4, NOTE_F4, NOTE_E4, NOTE_D4, // Happy Birthday dear (isim)
-  NOTE_AS4, NOTE_AS4, NOTE_A4, NOTE_F4, NOTE_G4, NOTE_F4 // Happy Birthday to you
-};
-
-// Notaların süreleri
-int noteDurations[] = {
-  4, 8, 4, 4, 4, 2,
-  4, 8, 4, 4, 4, 2,
-  4, 8, 4, 4, 4, 4, 2,
-  4, 8, 4, 4, 4, 2
-};
-
-void playHappyBirthday() {
-  for (int thisNote = 0; thisNote < sizeof(melody) / sizeof(melody[0]); thisNote++) {
-    int noteDuration = 1000 / noteDurations[thisNote];
-    tone(buzzerPin, melody[thisNote], noteDuration);
-    
-    int pauseBetweenNotes = noteDuration * 1.30;
-    delay(pauseBetweenNotes);
-    
-    noTone(buzzerPin);
-  }
-}
-
-void setup() {
-  // LED ve buzzer pinlerini çıkış olarak ayarlayın
-  pinMode(sariLedPin, OUTPUT);
-  pinMode(kirmiziLedPin, OUTPUT);
-  pinMode(maviLedPin, OUTPUT);
-  pinMode(buzzerPin, OUTPUT);
-}
-
-void loop() {
-  // Potansiyometrenin değerini okuyun (0-1023 arası)
-  potValue = analogRead(potPin);
-
-  // Potansiyometre değeri 500'ün altındaysa Happy Birthday şarkısını çal
-  if (potValue < 500) {
-    playHappyBirthday();
-    
-    // Melodi bitince LED'leri ve buzzer'ı kapat
-    digitalWrite(sariLedPin, LOW);
-    digitalWrite(kirmiziLedPin, LOW);
-    digitalWrite(maviLedPin, LOW);
-    noTone(buzzerPin);
-    
-  } else {
-    // Normal çalışma modu
-    beklemeSuresi = map(potValue, 0, 1023, 50, 1000);
-    frekans = map(potValue, 0, 1023, 100, 2000);
-
-    // Her LED'i sırayla yakıp söndür
-    digitalWrite(sariLedPin, HIGH);
-    digitalWrite(kirmiziLedPin, LOW);
-    digitalWrite(maviLedPin, LOW);
-    tone(buzzerPin, frekans);
-    delay(beklemeSuresi);
-
-    digitalWrite(sariLedPin, LOW);
-    digitalWrite(kirmiziLedPin, HIGH);
-    digitalWrite(maviLedPin, LOW);
-    tone(buzzerPin, frekans);
-    delay(beklemeSuresi);
-
-    digitalWrite(sariLedPin, LOW);
-    digitalWrite(kirmiziLedPin, LOW);
-    digitalWrite(maviLedPin, HIGH);
-    tone(buzzerPin, frekans);
-    delay(beklemeSuresi);
-
-    noTone(buzzerPin);
-  }
-}
+        // LED'lerin bağlı olduğu pinleri tanımlayın
+        const int sariLedPin = 7;
+        const int kirmiziLedPin = 6;
+        const int maviLedPin = 5;
+        
+        // Buzzer'ın bağlı olduğu pini tanımlayın
+        const int buzzerPin = 8;
+        
+        // Potansiyometrenin bağlı olduğu analog pini tanımlayın
+        const int potPin = A0;
+        
+        // Değişkenleri tanımlayın
+        int potValue = 0;
+        int beklemeSuresi = 0;
+        int frekans = 0;
+        
+        // Happy Birthday notalarını ve sürelerini tanımlayın
+        #define NOTE_C4  262
+        #define NOTE_D4  294
+        #define NOTE_E4  330
+        #define NOTE_F4  349
+        #define NOTE_G4  392
+        #define NOTE_A4  440
+        #define NOTE_AS4 466
+        #define NOTE_B4  494
+        #define NOTE_C5  523
+        #define NOTE_D5  587
+        #define NOTE_E5  659
+        
+        // Happy Birthday şarkısının melodisi
+        int melody[] = {
+          NOTE_C4, NOTE_C4, NOTE_D4, NOTE_C4, NOTE_F4, NOTE_E4, // Happy Birthday to you
+          NOTE_C4, NOTE_C4, NOTE_D4, NOTE_C4, NOTE_G4, NOTE_F4, // Happy Birthday to you
+          NOTE_C4, NOTE_C4, NOTE_C5, NOTE_A4, NOTE_F4, NOTE_E4, NOTE_D4, // Happy Birthday dear (isim)
+          NOTE_AS4, NOTE_AS4, NOTE_A4, NOTE_F4, NOTE_G4, NOTE_F4 // Happy Birthday to you
+        };
+        
+        // Notaların süreleri
+        int noteDurations[] = {
+          4, 8, 4, 4, 4, 2,
+          4, 8, 4, 4, 4, 2,
+          4, 8, 4, 4, 4, 4, 2,
+          4, 8, 4, 4, 4, 2
+        };
+        
+        void playHappyBirthday() {
+          for (int thisNote = 0; thisNote < sizeof(melody) / sizeof(melody[0]); thisNote++) {
+            int noteDuration = 1000 / noteDurations[thisNote];
+            tone(buzzerPin, melody[thisNote], noteDuration);
+            
+            int pauseBetweenNotes = noteDuration * 1.30;
+            delay(pauseBetweenNotes);
+            
+            noTone(buzzerPin);
+          }
+        }
+        
+        void setup() {
+          // LED ve buzzer pinlerini çıkış olarak ayarlayın
+          pinMode(sariLedPin, OUTPUT);
+          pinMode(kirmiziLedPin, OUTPUT);
+          pinMode(maviLedPin, OUTPUT);
+          pinMode(buzzerPin, OUTPUT);
+        }
+        
+        void loop() {
+          // Potansiyometrenin değerini okuyun (0-1023 arası)
+          potValue = analogRead(potPin);
+        
+          // Potansiyometre değeri 500'ün altındaysa Happy Birthday şarkısını çal
+          if (potValue < 500) {
+            playHappyBirthday();
+            
+            // Melodi bitince LED'leri ve buzzer'ı kapat
+            digitalWrite(sariLedPin, LOW);
+            digitalWrite(kirmiziLedPin, LOW);
+            digitalWrite(maviLedPin, LOW);
+            noTone(buzzerPin);
+            
+          } else {
+            // Normal çalışma modu
+            beklemeSuresi = map(potValue, 0, 1023, 50, 1000);
+            frekans = map(potValue, 0, 1023, 100, 2000);
+        
+            // Her LED'i sırayla yakıp söndür
+            digitalWrite(sariLedPin, HIGH);
+            digitalWrite(kirmiziLedPin, LOW);
+            digitalWrite(maviLedPin, LOW);
+            tone(buzzerPin, frekans);
+            delay(beklemeSuresi);
+        
+            digitalWrite(sariLedPin, LOW);
+            digitalWrite(kirmiziLedPin, HIGH);
+            digitalWrite(maviLedPin, LOW);
+            tone(buzzerPin, frekans);
+            delay(beklemeSuresi);
+        
+            digitalWrite(sariLedPin, LOW);
+            digitalWrite(kirmiziLedPin, LOW);
+            digitalWrite(maviLedPin, HIGH);
+            tone(buzzerPin, frekans);
+            delay(beklemeSuresi);
+        
+            noTone(buzzerPin);
+          }
+        }
 
 
